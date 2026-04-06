@@ -8,9 +8,13 @@ public class PlayerJump : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded = true;
 
+    //Para animacion saltar o correr
+    private Animator animator;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -25,6 +29,12 @@ public class PlayerJump : MonoBehaviour
         {
             rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
+
+        // Detectar si está en el suelo
+        bool grounded = Mathf.Abs(rb.linearVelocity.y) < 0.1f;
+
+        // Enviar al Animator paraque muestre el si caballo Run o Jump
+        animator.SetBool("isGrounded", grounded);
     }
 
     void Jump()
