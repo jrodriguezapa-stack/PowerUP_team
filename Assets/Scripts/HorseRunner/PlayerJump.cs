@@ -10,11 +10,13 @@ public class PlayerJump : MonoBehaviour
 
     // Para animacion
     private Animator animator;
+    private AudioSource gallopAudio;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        gallopAudio = GetComponentInChildren<AudioSource>();
     }
 
     void Update()
@@ -24,17 +26,30 @@ public class PlayerJump : MonoBehaviour
             Jump();
         }
 
-        // Caída 
+        // Aumentar velocidad de caída
         if (rb.linearVelocity.y < 0)
         {
             rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        //  animacion suelo
-       
+        // Animación usando grounded real
         animator.SetBool("isGrounded", isGrounded);
 
-        
+        // Sonido de galope
+        if (isGrounded)
+        {
+            if (!gallopAudio.isPlaying)
+            {
+                gallopAudio.Play();
+            }
+        }
+        else
+        {
+            if (gallopAudio.isPlaying)
+            {
+                gallopAudio.Stop();
+            }
+        }
     }
 
     void Jump()
