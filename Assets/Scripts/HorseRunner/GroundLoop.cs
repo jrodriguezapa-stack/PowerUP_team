@@ -6,10 +6,24 @@ public class GroundLoop : MonoBehaviour
     public float resetX = -20f;
     public float startX = 20f;
 
+    public float pixelsPerUnit = 32f; 
+
     void Update()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        // mover
+        float move = speed * Time.deltaTime;
+        transform.position += new Vector3(-move, 0, 0);
 
+        // snap a pixel (MUY IMPORTANTE)
+        float snappedX = Mathf.Round(transform.position.x * pixelsPerUnit) / pixelsPerUnit;
+
+        transform.position = new Vector3(
+            snappedX,
+            transform.position.y,
+            transform.position.z
+        );
+
+        // loop
         if (transform.position.x <= resetX)
         {
             transform.position = new Vector3(startX, transform.position.y, transform.position.z);
