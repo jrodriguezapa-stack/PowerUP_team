@@ -3,12 +3,12 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour
 {
     public float jumpForce = 7f;
-    public float fallMultiplier = 2.5f;
+    public float fallMultiplier = 2.2f; // para la caída
 
     private Rigidbody rb;
     private bool isGrounded = true;
 
-    //Para animacion saltar o correr
+    // Para animacion
     private Animator animator;
 
     void Start()
@@ -19,22 +19,22 @@ public class PlayerJump : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))&& isGrounded)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && isGrounded)
         {
             Jump();
         }
 
-        // Aumentar velocidad de caída
+        // Caída 
         if (rb.linearVelocity.y < 0)
         {
             rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        // Detectar si está en el suelo
-        bool grounded = Mathf.Abs(rb.linearVelocity.y) < 0.1f;
+        //  animacion suelo
+       
+        animator.SetBool("isGrounded", isGrounded);
 
-        // Enviar al Animator paraque muestre el si caballo Run o Jump
-        animator.SetBool("isGrounded", grounded);
+        
     }
 
     void Jump()
@@ -51,6 +51,15 @@ public class PlayerJump : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+    }
+
+    // AÑADIDO para saber si ya esta en el suelo
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
         }
     }
 }
