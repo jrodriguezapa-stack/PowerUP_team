@@ -6,7 +6,7 @@ using UnityEngine;
  */
 public class ObstacleMove : MonoBehaviour
 {
-    public static float globalSpeed = 6f;
+    public static float globalSpeed = 6f;//6
 
     private Rigidbody rb;
 
