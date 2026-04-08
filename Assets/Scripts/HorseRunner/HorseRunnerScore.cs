@@ -17,7 +17,7 @@ public class HorseRunnerScore : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f; // resetea velocidad del juego
-        ObstacleMove.globalSpeed = 6f;
+        ObstacleMove.globalSpeed = 3f;//6
 
         // oculta texto al inicio
         resultText.gameObject.SetActive(false);
@@ -62,7 +62,7 @@ public class HorseRunnerScore : MonoBehaviour
         ShowWin();
 
         // Ralentizar juego
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0.2f;//0.5
 
         // Esperar y cambiar escena
         Invoke(nameof(LoadNext), 1f);
@@ -91,7 +91,7 @@ public class HorseRunnerScore : MonoBehaviour
         ShowGameOver();
 
         // Ralentizar juego
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0.5f;//0.5
 
         // Esperar y cambiar escena
         Invoke(nameof(LoadNext), 1f);

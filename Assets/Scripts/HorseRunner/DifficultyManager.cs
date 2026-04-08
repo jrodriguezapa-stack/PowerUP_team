@@ -6,7 +6,7 @@ using UnityEngine;
  */
 public class DifficultyManager : MonoBehaviour
 {
-    public float speedIncreasePerSecond = 0.2f;
+    public float speedIncreasePerSecond = 0.2f;//0.2
     public float maxSpeed = 14f;
 
     void Update()

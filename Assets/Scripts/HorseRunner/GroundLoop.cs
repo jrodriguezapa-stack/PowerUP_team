@@ -6,7 +6,7 @@ public class GroundLoop : MonoBehaviour
     public float resetX = -20f;
     public float startX = 20f;
 
-    public float pixelsPerUnit = 32f; 
+    public float pixelsPerUnit = 32f; //32
 
     void Update()
     {
@@ -14,7 +14,7 @@ public class GroundLoop : MonoBehaviour
         float move = speed * Time.deltaTime;
         transform.position += new Vector3(-move, 0, 0);
 
-        // snap a pixel (MUY IMPORTANTE)
+        // snap a pixel
         float snappedX = Mathf.Round(transform.position.x * pixelsPerUnit) / pixelsPerUnit;
 
         transform.position = new Vector3(

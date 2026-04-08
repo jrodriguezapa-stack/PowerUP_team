@@ -6,7 +6,7 @@ public class ParallaxLoop : MonoBehaviour
     public float resetPositionX = -10f;
     public float startPositionX = 10f;
 
-    public float pixelsPerUnit = 64f; 
+    public float pixelsPerUnit = 64f; //64
 
     void Update()
     {
